@@ -5,27 +5,30 @@
 
 
 # 1a) Find the genre with the name "Hip Hop/Rap".
+hiphop_finder = Genre.find_by(name: "Hip Hop/Rap")
 
 
 
 # 1b) Count how many tracks belong to the "Hip Hop/Rap" genre
-
-
+ poop =Genre.find_by(name: "Hip Hop/Rap").id
+ Track.where(genre_id:poop)
 
 # 2) Find the total amount of time required to listen to all the tracks in the database.
-
+Track.sum("milliseconds")
 
 
 # 3a) Find the highest price of any track that has the media type "MPEG audio file".
-
+mpeg = MediaType.find_by(name: "MPEG audio file").id
+Track.where(media_type_id: mpeg).maximum("unit_price").to_s
 
 
 # 3b) Find the name of the most expensive track that has the media type "MPEG audio file".
-
-
+mpeg = MediaType.find_by(name: "MPEG audio file").id
+expensive_track = Track.where(media_type_id: mpeg).maximum("unit_price").to_s
+Track.find_by(unit_price: expensive_track)
 
 # 4) Find the 2 oldest artists.
-
+first = Artist.all.order(:created_at).limit(2)  
 
 
 ### Stretch Exercise (Active Record Query Interface)
